@@ -1,2 +1,4 @@
-_G.defines = require('faketorio/defines')
-require('faketorio/searchers')
+if not _ENV.defines then
+    require('faketorio.searchers')
+    require('faketorio.globals')
+end
