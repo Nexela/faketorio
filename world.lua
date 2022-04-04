@@ -16,9 +16,9 @@ World.quit - Closes the world simulator
 
 note: save/load/reload haven't been tested yet.
 --]]
-require('faketorio/globals')
+require('faketorio.globals')
 
-local Table = require('__stdlib__/stdlib/utils/table')
+local Table = require('faketorio.lualib.util').table
 
 local World = {
     _msg_buffer = {},
@@ -147,7 +147,7 @@ function World.init(multiplayer, savetable, config_changed_data)
     savetable = savetable or {}
     local saved_global = savetable.global
     local saved_game = savetable.game
-    savetable = Table.size(savetable) > 0 and savetable or false
+    savetable = table_size(savetable) > 0 and savetable or false
     assert(savetable and saved_global and saved_game or not savetable, 'Invalid savetable')
 
     -- ensure config_changed_data is always a table if requested
@@ -231,7 +231,7 @@ function World.create_players(how_many)
     _G.game.players = _G.game.players or {}
 
     -- players may be sparse so some care must be taken here
-    while Table.size(game.players) < how_many do
+    while table_size(game.players) < how_many do
         local newindex = #game.players + 1
         game.players[newindex] =
             World.fake_userdata(

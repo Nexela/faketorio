@@ -1,5 +1,5 @@
 --- A whole lot of work to sort our paths pretty like but this should help assure local files are searched for first.
-package.path = package.path .. ';./../?.lua;./../?/init.lua'
+package.path = package.path .. ';./../?.lua;./../?/init.lua;./lualib/?.lua;./../lualib/?.lua'
 local paths = {}
 for str in string.gmatch(package.path, '([^;]+)') do table.insert(paths, str) end
 local patterns = { '^%?%.', '^%?/', '^%./', '^/h', '^/u', '.' }
