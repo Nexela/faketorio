@@ -1,3 +1,6 @@
+if _ENV._FAKETORIO_globals then return end
+_ENV._FAKETORIO_globals = true
+
 _ENV.defines = require('faketorio.defines')
 _ENV.settings = require('faketorio.settings')
 _ENV.log = function() end
