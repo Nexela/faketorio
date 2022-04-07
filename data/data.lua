@@ -22,8 +22,8 @@ local data = {
     is_demo = false
 }
 
-local types = pcall(require, 'faketorio.data.types')
-if types then
+local ok, types = pcall(require, 'faketorio.data.types')
+if ok then
     for _, k in pairs(types) do
         data.raw[k] = require('faketorio.data.raw.'..k)
     end
