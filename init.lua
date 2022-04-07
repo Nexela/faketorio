@@ -1,7 +1,12 @@
 if not _ENV._FAKETORIO and _ENV.defines then
+  -- If the faketorio require is somehow left in the mod when loading Factorio just return an empty table
+  -- which in return indexes an empty table which can also return an empty function when __called
   return setmetatable({}, {
     __index = function()
-      return {}
+      return setmetatable({}, {
+        __call = function()
+        end
+      })
     end
   })
 end

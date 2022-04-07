@@ -22,8 +22,11 @@ local data = {
     is_demo = false
 }
 
-for _, k in pairs(require('faketorio.data.types')) do
-    data.raw[k] = require('faketorio.data.raw.'..k)
+local types = pcall(require, 'faketorio.data.types')
+if types then
+    for _, k in pairs(types) do
+        data.raw[k] = require('faketorio.data.raw.'..k)
+    end
 end
 
 for _, k in pairs{'int-setting', 'double-setting', 'bool-setting', 'string-setting'} do
