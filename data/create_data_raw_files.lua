@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 -- luacheck: globals io
 --- Take a full data_raw file and parse it out,.
 local serpent = require('faketorio.libs.serpent')
@@ -42,7 +43,7 @@ local function write_data_raw_files(skip)
     local file_name = 'data/raw/' .. k .. '.lua'
     print(('Processing type: %s %' .. (max_len + 30) ..'s'):format(k, file_name))
     local file = assert(io.open(file_name, 'w'))
-    file:write(serpent.block(v, { sparse = false, compact = false, name = k, indent = '  ' }))
+    file:write(serpent.dump(v, { sparse = false, compact = false, name = '_', indent = '  ' }))
     file:close()
   end
 end
