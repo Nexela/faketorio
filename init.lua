@@ -25,15 +25,16 @@ _ENV._FAKETORIO = true
 --]] --
 
 do
-  local paths = {}
-  for str in string.gmatch(package.path, '([^;]+)') do table.insert(paths, str) end
+  local dict = {}
+  for str in string.gmatch(package.path, '([^;]+)') do dict[str] = true end
   local path = debug.getinfo(1, 'S').source:sub(2, -19)
-  paths[#paths + 1] = path .. '?.lua'
-  paths[#paths + 1] = path .. '?/init.lua'
-  paths[#paths + 1] = path .. 'faketorio/lualib/?.lua'
-  paths[#paths + 1] = './?/init.lua'
-  paths[#paths + 1] = '../?.lua'
-  paths[#paths + 1] = '../?/init.lua'
+  dict[path .. '?.lua'] = true
+  dict[path .. '?/init.lua'] = true
+  dict[path .. 'faketorio/lualib/?.lua'] = true
+  dict['../?.lua'] = true
+  dict['../?/init.lua'] = true
+  local paths = {}
+  for k in pairs(dict) do paths[#paths + 1] = k end
 
   local patterns = { '^%./%?', '^%.%.', '^/h', '^/u', '.' }
   local function special_sort(a, b)
@@ -50,41 +51,14 @@ do
   package.path = table.concat(paths, ';')
 end
 
+---Add a searcher to convert __mod__ to mod
 require('faketorio.searcher')
+
+---Create fake factorio globals
 require('faketorio.globals')
-
 local faketorio = {}
-
-function faketorio.data(modname)
-  modname = modname or 'faketorio'
-
-  _ENV.commands = nil
-  _ENV.script = nil
-  _ENV.global = nil
-  _ENV.game = nil
-
-  _ENV.data = require('faketorio.data')
-  _ENV.mods = { [modname] = true }
-end
-
-function faketorio.control(modname, version)
-  modname = modname or 'faketorio'
-
-  _ENV.data = nil
-  _ENV.mods = nil
-
-  _ENV.global = {}
-  _ENV.game = require('faketorio.control.game')
-  _ENV.commands = require('faketorio.control.commands')
-  _ENV.remote = require('faketorio.control.remote')
-  _ENV.script = require('faketorio.control.script')
-  _ENV.script.active_mods[modname] = version or "0.0.1"
-  _ENV.script.mod_name = modname
-end
-
-function faketorio.world(modname, version)
-  modname = modname or 'faketorio'
-  version = version or 1
-end
+faketorio.data = require("faketorio.data.setup-data")
+faketorio.control = require("faketorio.control.setup-control")
+faketorio.world = require("faketorio.world").setup
 
 return faketorio

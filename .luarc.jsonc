@@ -1,5 +1,4 @@
 {
-    "completion.requireSeparator": "/",
     "diagnostics.disable": [],
     "diagnostics.globals": [
         "global",
@@ -45,23 +44,22 @@
     ],
     "runtime.path": [
         "?.lua",
-        "/home/nexela/Media/Develop/Cpp/factorio/data/core/lualib/?.lua"
+        "?/init.lua",
+        "../?.lua",
+        "../?/init.lua",
+        "/home/nexela/Media/Develop/Lua/Factorio/?.lua",
+        "/home/nexela/Media/Develop/Lua/Factorio/?/init.lua"
     ],
     "runtime.pathStrict": true,
-    "runtime.plugin": "/home/nexela/Media/Develop/Lua/libs/factorio-sumneko-plugin/plugin.lua",
+    // "runtime.plugin": "/home/nexela/Media/Develop/Lua/libs/factorio-sumneko-plugin/plugin.lua",
     "runtime.version": "Lua 5.2",
     "spell.dict": [],
     "type.castNumberToInteger": false,
     "type.weakUnionCheck": false,
     "workspace.checkThirdParty": false,
     "workspace.ignoreDir": [
-        ".vscode/",
-        "base/scenarios/",
-        "diffed.lua"
+        ".vscode/"
     ],
-    "workspace.library": [
-        "/home/nexela/Media/Develop/Lua/Factorio/.vscode/factorio/",
-        "/home/nexela/Media/Develop/Lua/Factorio/.vscode/factorio-data-api/",
-        "/home/nexela/Media/Develop/Lua/Factorio/.vscode/annotations.lua"
-    ]
+    "completion.requireSeparator": ".",
+    "workspace.library": []
 }

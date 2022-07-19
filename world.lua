@@ -271,14 +271,14 @@ function World.save()
 end
 
 function World.quit(save)
-    local result = false
+    local result
     if save then
         result = World.save()
     end
     _G.global = {}
     _G.game = nil
     _G.script = nil
-    return result or nil
+    return result
 end
 
 -- convenience function to quit and re-init World, optionally simulating save/load
@@ -289,6 +289,11 @@ end
 function World.reload(save, config_changed_data)
     local savetable = World.quit(save)
     return World.load(savetable, config_changed_data)
+end
+
+function World.setup(modname, version)
+    modname = modname or 'faketorio'
+    version = version or 1
 end
 
 return World
