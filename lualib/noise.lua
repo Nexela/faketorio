@@ -294,7 +294,7 @@ local function define_noise_function( func )
     water_level = nfvar("water_level"),
     finite_water_level = nfvar("finite_water_level")
   }
-  return tne(func(x,y,tile_props,map_props), csloc(0)) -- TODO: Pass in sloc of the function, if we know it
+  return tne(func(x,y,tile_props,map_props), csloc(0))
 end
 
 local function clamp(v, min, max, sloc)

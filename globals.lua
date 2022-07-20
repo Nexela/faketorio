@@ -15,7 +15,7 @@ end
 _ENV.serpent = require('faketorio.libs.serpent')
 _ENV.inspect = require('faketorio.libs.inspect')
 
---- TODO Remove
+---@todo Remove
 _ENV.package.remove_stdlib = function()
     for name in pairs(package.loaded) do
         if name:find('%_%_stdlib%_%_') or name:find('^stdlib/') or name:find('^faketorio/') then
