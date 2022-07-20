@@ -51,7 +51,7 @@ local script = {
     end
 
     local ok, msg = xpcall(function()
-      return (registry[id] or function()
+      return (registry[id] or function(_)
       end)(event)
     end, debug.traceback)
 

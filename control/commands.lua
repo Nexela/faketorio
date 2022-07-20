@@ -14,7 +14,7 @@ local function game_commands(_, k)
 end
 setmetatable(commands.game_commands, {__index = game_commands})
 
-function commands.add_command(name, _help, func)
+function commands.add_command(name, _help_, func)
     if commands.commands[name] or commands.game_commands[name] then
         error('Command Already Exists')
     end
